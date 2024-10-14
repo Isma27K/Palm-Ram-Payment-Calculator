@@ -3,11 +3,13 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class History extends JPanel {
+    Fun appLogic;
     private JTable historyTable;
     private JScrollPane scrollPane;
     private JLabel titleLabel;
 
-    public History() {
+    public History(Fun appLogic) {
+        this.appLogic = appLogic;
         setLayout(new BorderLayout());
         setBackground(new Color(240, 240, 240)); // Light gray background
 

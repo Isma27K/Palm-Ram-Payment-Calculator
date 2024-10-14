@@ -5,13 +5,15 @@ import java.io.File;
 import java.io.IOException;
 
 public class Calculator extends JPanel {
+    private Fun appLogic;
     JTextField currentPriceField, idField, initialWeightField, finalWeightField;
     JComboBox<String> gradeComboBox;
     JButton generateButton;
     JLabel imageLabel;
     JPanel contentPanel, inputPanel;
 
-    public Calculator() {
+    public Calculator(Fun appLogic) {
+        this.appLogic = appLogic;
         setLayout(new BorderLayout());
 
         // Create main content panel
@@ -53,6 +55,9 @@ public class Calculator extends JPanel {
         generateButton = new JButton("Generate");
         inputPanel.add(generateButton, gbc);
 
+        // Add action listener to the generate button
+        generateButton.addActionListener(e -> generatePayment());
+
         // Add image on the right
         try {
             File imageFile = new File("./asset/sawit.png");
@@ -72,6 +77,35 @@ public class Calculator extends JPanel {
         contentPanel.add(centerPanel, BorderLayout.CENTER);
         add(contentPanel, BorderLayout.CENTER);
         applyStyles();
+    }
+
+    private void generatePayment() {
+        try {
+            int userId = Integer.parseInt(idField.getText());
+            double currentPrice = Double.parseDouble(currentPriceField.getText());
+            double initialWeight = Double.parseDouble(initialWeightField.getText());
+            double finalWeight = Double.parseDouble(finalWeightField.getText());
+            String grade = (String) gradeComboBox.getSelectedItem();
+
+            double netWeight = Math.abs(finalWeight - initialWeight);
+            double payment = appLogic.calculatePayment(currentPrice, initialWeight, finalWeight, grade);
+            appLogic.addTransaction(userId, currentPrice, initialWeight, finalWeight, grade);
+
+            JOptionPane.showMessageDialog(this, 
+                String.format("Net Weight: %.2f kg\nPayment calculated: RM %.2f", netWeight, payment),
+                "Payment Result", 
+                JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, 
+                "Please enter valid numbers for all fields.", 
+                "Input Error", 
+                JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, 
+                ex.getMessage(), 
+                "Input Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void addLabelAndField(JPanel panel, GridBagConstraints gbc, String labelText, JTextField field) {

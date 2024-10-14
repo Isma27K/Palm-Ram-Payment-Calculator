@@ -5,12 +5,14 @@ import java.io.File;
 import java.io.IOException;
 
 public class Register extends JPanel {
-    JTextField nameField, plateNumberField, phoneNumberField;
-    JButton registerButton;
-    JPanel contentPanel, inputPanel;
-    JLabel imageLabel;
+    private Fun appLogic;
+    private JTextField nameField, plateNumberField, phoneNumberField;
+    private JButton registerButton;
+    private JPanel contentPanel, inputPanel;
+    private JLabel imageLabel;
 
-    public Register() {
+    public Register(Fun appLogic) {
+        this.appLogic = appLogic;
         setLayout(new BorderLayout());
 
         // Create main content panel
@@ -41,6 +43,9 @@ public class Register extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         registerButton = new JButton("Register");
         inputPanel.add(registerButton, gbc);
+
+        // Add action listener to the register button
+        registerButton.addActionListener(e -> registerUser());
 
         // Add image on the right
         try {
@@ -94,5 +99,31 @@ public class Register extends JPanel {
         registerButton.setBackground(new Color(0, 122, 255));
         registerButton.setForeground(Color.WHITE);
         registerButton.setFont(new Font("Arial", Font.BOLD, 14));
+    }
+
+    private void registerUser() {
+        String name = nameField.getText();
+        String plateNumber = plateNumberField.getText();
+        String phoneNumber = phoneNumberField.getText();
+
+        if (!name.isEmpty() && !plateNumber.isEmpty() && !phoneNumber.isEmpty()) {
+            appLogic.addUser(name, plateNumber, phoneNumber);
+            JOptionPane.showMessageDialog(this, 
+                "User registered successfully!", 
+                "Registration Success", 
+                JOptionPane.INFORMATION_MESSAGE);
+            clearFields();
+        } else {
+            JOptionPane.showMessageDialog(this, 
+                "Please fill in all fields.", 
+                "Registration Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void clearFields() {
+        nameField.setText("");
+        plateNumberField.setText("");
+        phoneNumberField.setText("");
     }
 }

@@ -2,8 +2,10 @@ import javax.swing.*;
 //import java.awt.*;
 
 public class Main extends JFrame {
+    public Fun appLogic;
 
     public Main() {
+        appLogic = new Fun();
         setTitle("Palm Oil Ram Factory System");
         setSize(700, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -20,16 +22,16 @@ public class Main extends JFrame {
         JTabbedPane tabbedPane = new JTabbedPane();
 
         // Create Calculator
-        Calculator calculator = new Calculator();
+        Calculator calculator = new Calculator(appLogic);
 
         // Create Register
-        Register register = new Register();
+        Register register = new Register(appLogic);
 
         // Create History
-        History history = new History();
+        History history = new History(appLogic);
 
         // Create User
-        User user = new User();
+        User user = new User(appLogic);
 
         // Add tabs to the tabbed pane
         tabbedPane.addTab("Calculator", calculator);
