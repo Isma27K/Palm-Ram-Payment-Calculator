@@ -21,7 +21,7 @@ public class Register extends JPanel {
         gbc.insets = new Insets(5, 5, 5, 5);
 
         // Add title
-        JLabel titleLabel = new JLabel("OilPalmPay", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("Register", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         contentPanel.add(titleLabel, BorderLayout.NORTH);
 

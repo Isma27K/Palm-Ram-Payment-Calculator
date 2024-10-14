@@ -25,9 +25,17 @@ public class Main extends JFrame {
         // Create Register
         Register register = new Register();
 
+        // Create History
+        History history = new History();
+
+        // Create User
+        User user = new User();
+
         // Add tabs to the tabbed pane
         tabbedPane.addTab("Calculator", calculator);
         tabbedPane.addTab("Register", register);
+        tabbedPane.addTab("History", history);
+        tabbedPane.addTab("User", user);
 
         // Add the tabbed pane to the frame (this)
         add(tabbedPane);
