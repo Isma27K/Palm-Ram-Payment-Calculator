@@ -1,10 +1,9 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.List;
 
 public class User extends JPanel {
-    private Fun appLogic;
+    Fun appLogic;
     private JTable userTable;
     private JScrollPane scrollPane;
     private JLabel titleLabel;
