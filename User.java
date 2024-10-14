@@ -43,11 +43,6 @@ public class User extends JPanel {
         buttonPanel.add(updateButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // Add action listener to refresh the table
-        JButton refreshButton = new JButton("Refresh");
-        refreshButton.addActionListener(e -> refreshUserTable());
-        buttonPanel.add(refreshButton);
-
         applyStyles();
     }
 
@@ -92,20 +87,6 @@ public class User extends JPanel {
         model.setRowCount(0); // Clear existing data
         for (Object[] row : newData) {
             model.addRow(row);
-        }
-    }
-
-    private void refreshUserTable() {
-        List<Fun.User> users = appLogic.getUsers();
-        DefaultTableModel model = (DefaultTableModel) userTable.getModel();
-        model.setRowCount(0); // Clear existing data
-        for (Fun.User user : users) {
-            model.addRow(new Object[]{
-                user.getId(),
-                user.getName(),
-                user.getPlateNumber(),
-                user.getPhoneNumber()
-            });
         }
     }
 }
