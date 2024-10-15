@@ -33,10 +33,12 @@ public class Calculator extends JPanel {
         centerPanel.add(inputPanel, BorderLayout.CENTER);
 
         // Add input fields
-        addLabelAndField(inputPanel, gbc, "Current price", currentPriceField = new JTextField(20));
+        addLabelAndField(inputPanel, gbc, "Current price (RM)", currentPriceField = new JTextField(20));
         addLabelAndField(inputPanel, gbc, "ID", idField = new JTextField(20));
-        addLabelAndField(inputPanel, gbc, "Initial Weight", initialWeightField = new JTextField(20));
-        addLabelAndField(inputPanel, gbc, "Final Weight", finalWeightField = new JTextField(20));
+        addLabelAndField(inputPanel, gbc, "Initial Weight (kg in vehicle)", initialWeightField = new JTextField(20));
+        addLabelAndField(inputPanel, gbc, "Final Weight (kg in vehicle)", finalWeightField = new JTextField(20));
+
+        currentPriceField.setText("600"); // set default val here
 
         // Add grade dropdown
         gbc.gridx = 0;
